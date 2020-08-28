@@ -5,9 +5,9 @@
 
 [PDF](https://arxiv.org/pdf/1603.08182.pdf) | [Webpage & Benchmarks & Datasets](http://3dmatch.cs.princeton.edu/) | [Video](https://www.youtube.com/watch?v=gZrsJJtDvvA)
 
-*Andy Zeng, Shuran Song, Matthias Nießner, Matthew Fisher, Jianxiong Xiao, and Thomas Funkhouser*
+*[Andy Zeng](http://andyzeng.com/), [Shuran Song](http://vision.princeton.edu/people/shurans/), [Matthias Nießner](http://www.niessnerlab.org/members/matthias_niessner/profile.html), [Matthew Fisher](https://research.adobe.com/person/matt-fisher/), [Jianxiong Xiao](http://vision.princeton.edu/people/xj/), and [Thomas Funkhouser](http://www.cs.princeton.edu/~funk/)*
 
-IEEE Conference on Computer Vision and Pattern Recognition (CVPR) 2017 **Oral Presentation**
+IEEE Conference on Computer Vision and Pattern Recognition (CVPR) 2017 **[Oral Presentation](https://www.youtube.com/watch?v=qNVZl7bCjsU&list=PL_bDvITUYucADb15njRd7geem8vxOyo6N&index=3)**
 
 Matching local geometric features on real-world depth images is a challenging task due to the noisy, low-resolution, and incomplete nature of 3D scan data. These difficulties limit the performance of current state-of-art methods, which are typically based on histograms over geometric properties. In this paper, we present 3DMatch, a data-driven model that learns a local volumetric patch descriptor for establishing correspondences between partial 3D data. To amass training data for our model, we propose an unsupervised feature learning method that leverages the millions of correspondence labels found in existing RGB-D reconstructions. Experiments show that our descriptor is not only able to match local geometry in new scenes for reconstruction, but also generalize to different tasks and spatial scales (e.g. instance-level object model alignment for the Amazon Picking Challenge, and mesh surface correspondence). Results show that 3DMatch consistently outperforms other state-of-the-art approaches by a significant margin. 
 
@@ -36,11 +36,18 @@ All relevant information and downloads can be found [here](http://3dmatch.cs.pri
 #### Contact
 If you have any questions or find any bugs, please let me know: [Andy Zeng](http://www.cs.princeton.edu/~andyz/) andyz[at]princeton[dot]edu
 
+## Change Log
+* **Mar. 20, 2018.** Update: added labels for test-set of keypoint matching benchmark (for convenience).
+* **Nov. 02, 2017.** Bug fix: added `#include <random>` to utils.hpp in demo code.
+* **Oct. 30, 2017.** Bug fix: included Quoc-Huy's fix for NaN errors that occasionally occur during training.
+* **Oct. 28, 2017.** Notice: demo code only reads 3D point clouds saved in a simple binary format. If you would like to run the 3DMatch demo code on your own point cloud format, please modify demo.cu accordingly.
+* **Apr. 06, 2017.** Notice: 3DMatch uses cuDNN 5.1. Revised install instructions.
+
 ## Dependencies
 
 Our reference implementation of 3DMatch, as well as other components in this toolbox, require the following dependencies. Tested on Ubuntu 14.04.
 
-0. [CUDA 7.5](https://developer.nvidia.com/cuda-downloads) and [cuDNN 5.1](https://developer.nvidia.com/cudnn). You may need to register with NVIDIA. Below are some additional steps to set up cuDNN 5.1. **NOTE** We highly recommend that you install different versions of cuDNN to different directories (e.g., ```/usr/local/cudnn/vXX```) because different software packages may require different versions.
+0. [CUDA 7.5](https://developer.nvidia.com/cuda-toolkit-archive) and [cuDNN 5.1](https://developer.nvidia.com/cudnn). You may need to register with NVIDIA. Below are some additional steps to set up cuDNN 5.1. **NOTE** We highly recommend that you install different versions of cuDNN to different directories (e.g., ```/usr/local/cudnn/vXX```) because different software packages may require different versions.
 
 	```shell
 	LIB_DIR=lib$([[ $(uname) == "Linux" ]] && echo 64)
@@ -86,7 +93,7 @@ This demo aligns two 3D point clouds (projected from single-view depth maps) usi
 	./download-weights.sh # 3dmatch-weights-snapshot-137000.marvin
 	```
 
-0. Load the two example 3D point clouds, compute their TDF voxel grid volumes, and compute random surface keypoints and their 3DMatch descriptors (saved to binary files on disk). Warning: this demo only reads 3D point clouds saved in a simple binary format. If you want would like to run 3DMatch on your own point cloud format, please modify demo.cu accordingly.
+0. Load the two example 3D point clouds, compute their TDF voxel grid volumes, and compute random surface keypoints and their 3DMatch descriptors (saved to binary files on disk). Warning: this demo only reads 3D point clouds saved in a simple binary format. If you would like to run the 3DMatch demo code on your own point cloud format, please modify demo.cu accordingly.
 
 	```shell
 	# Generate fragment-1.desc.3dmatch.bin and fragment-1.keypts.bin
